@@ -1,6 +1,6 @@
 import random, ast
 from termcolor import colored
-with open("word.txt","r")
+with open("word.txt","r"):
         lsf = wrd.read()
         lsl = lsf
         ls = ast.literal_eval(lsl)
