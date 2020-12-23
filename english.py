@@ -24,7 +24,7 @@ if len(sys.argv) == 2:
 					a_result = a_result+"}"
 					a_result_final = a_result.replace(',}','}').replace(',,',',')
 					print(a_result_final)
-					write_dict = open('word1.txt','w')
+					write_dict = open('word.txt','w')
 					write_dict.write(a_result_final)
 					sys.exit()
 				else:
@@ -41,14 +41,7 @@ if len(sys.argv) == 2:
 				print(first_p)
 				print('\n')
 				a_result = a_result+first_p+second_p
-			
-
-		
-		
-		sys.exit()
-	if sys.argv[1] == "t" :
-		sys.exit()
-
+				
 if len(sys.argv) > 2:
 	print('too much argument!')
 
