@@ -2,6 +2,7 @@ import random, ast, sys
 from termcolor import colored
 
 status_add = 0
+next = 0
 
 if len(sys.argv) == 2:
 	if sys.argv[1] == "-c":
@@ -17,9 +18,18 @@ if len(sys.argv) == 2:
 		while True:
 			add_check = input('Sure? (Y/n) ').lower()
 			if add_check == "y" or add_check == "":
-				pass
+				first_d = input('1 : ')
+				second_d = input('2 : ')
+				if len(first_d) != 0 and len(second_d) != 0:
+					status_add = 1
+					first_p = ",'"+first_d+"':'"+second_d+"',"
+					second_p = ",'"+second_d+"':'"+first_d+"',"
+					print(first_p)
+					print('\n')
+					a_result = a_result+first_p+second_p
+				else:
+					print('Please fill both input!')
 			elif add_check == "n":
-				print('mulai')
 				if status_add == 1:
 					a_result = a_result+"}"
 					a_result_final = a_result.replace(',}','}').replace(',,',',')
@@ -28,20 +38,12 @@ if len(sys.argv) == 2:
 					write_dict.write(a_result_final)
 					sys.exit()
 				else:
+					print('Nothing changed')
 					sys.exit()
 			else:
 				print('Please write correctly!')
-				sys.exit()
-			first_d = input('1 : ')
-			second_d = input('2 : ')
-			if len(first_d) != 0 and len(second_d) != 0:
-				status_add = 1
-				first_p = ",'"+first_d+"':'"+second_d+"',"
-				second_p = ",'"+second_d+"':'"+first_d+"',"
-				print(first_p)
-				print('\n')
-				a_result = a_result+first_p+second_p
-				
+
+
 if len(sys.argv) > 2:
 	print('too much argument!')
 
