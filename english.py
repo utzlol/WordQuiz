@@ -1,19 +1,48 @@
-import random, ast, sys, time
+import random, ast, sys
 from termcolor import colored
 
 status_add = 0
 status_del = 0
-next = 0
 recent_add = ''
 
 if len(sys.argv) == 2:
-	if sys.argv[1] == "-a":
+	
+	if sys.argv[1] == "-d":
+		read = open("word.txt","r")
+		a_result = str(read.read())
+		read.close()
+		print(a_result)
+		a_result_dict = ast.literal_eval(a_result)
+		while True:
+			del_1 = input("Which one? : ")
+			if del_1 == "exit":
+				sys.exit()
+
+			if del_1 not in a_result:
+				print('Not found!')
+			else:
+				del_2 = a_result_dict.get(del_1)
+				print(f"Deleting {del_1} and {del_2}")
+				del a_result_dict[del_1]
+				del a_result_dict[del_2]
+				print(a_result_dict)
+				write = open("word.txt","w")
+				write.write(str(a_result_dict))
+				write.close()
+	
+	elif sys.argv[1] == "-a":
+	
 		read = open('word.txt', 'r')
 		print(read.read())
 		read.seek(0)
 		a_result = str(read.read())
+		print(a_result)
 		read.close()
+
+		if "{" not in a_result:
+			a_result = "{"+a_result
 		a_result = a_result.replace('}', '')
+		a_result_raw = a_result
 		print(a_result)
 		print('Create Mode Active!')
 		
@@ -35,12 +64,15 @@ if len(sys.argv) == 2:
 			elif add_check == "n":
 				if status_del == 1:
 					if len(recent_add) != 0:
-						a_result = a_result+recent_add
+						a_result = a_result_raw+recent_add
+						print('Ini yang run!')
 					else:
 						print("Nothing changed!")
 						sys.exit()
 					
 				if status_add == 1:
+					if "{," in a_result:
+						a_result = a_result.replace("{,","{")
 					a_result = a_result+"}"
 					a_result = a_result.replace(',}','}').replace(',,',',')
 					print(a_result)
