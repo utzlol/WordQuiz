@@ -44,7 +44,7 @@ if len(sys.argv) == 2:
 		a_result = a_result.replace('}', '')
 		a_result_raw = a_result
 		print(a_result)
-		print('Create Mode Active!')
+		print('Add Mode Active!')
 		
 		while True:
 			add_check = input('Sure? (Y/n) ').lower()
@@ -65,7 +65,6 @@ if len(sys.argv) == 2:
 				if status_del == 1:
 					if len(recent_add) != 0:
 						a_result = a_result_raw+recent_add
-						print('Ini yang run!')
 					else:
 						print("Nothing changed!")
 						sys.exit()
@@ -93,7 +92,7 @@ if len(sys.argv) == 2:
 					print("Not Found!")
 				else:
 					del_2 = recent_add.get(del_1)
-					print(f"Deleting {del_1} and kamu {del_2}")
+					print(f"Deleting {del_1} and {del_2}")
 					time.sleep(1)
 					del recent_add[del_1]
 					del recent_add[del_2]
