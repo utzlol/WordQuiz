@@ -1,4 +1,4 @@
-import random, ast, sys
+import random, ast, sys, time
 from termcolor import colored
 
 status_add = 0
@@ -44,14 +44,29 @@ if len(sys.argv) == 2:
 		a_result = a_result.replace('}', '')
 		a_result_raw = a_result
 		print(a_result)
-		print('Add Mode Active!')
+		print('Create Mode Active!')
 		
 		while True:
+			same_word = 0
+			fill_word = 0
+			execute_same_word = 1
+			
 			add_check = input('Sure? (Y/n) ').lower()
 			if add_check == "y" or add_check == "":
 				first_d = input('1 : ')
 				second_d = input('2 : ')
+				
 				if len(first_d) != 0 and len(second_d) != 0:
+					fill_word = 1
+				else:
+					execute_same_word = 0
+				
+				if execute_same_word == 1:
+					if first_d in str(a_result_raw) or second_d in str(a_result_raw):
+						same_word = 1
+						execute_same_word = 0
+
+				if fill_word == 1 and same_word == 0:
 					status_add = 1
 					first_p = ",'"+first_d+"':'"+second_d+"',"
 					second_p = ",'"+second_d+"':'"+first_d+"',"
@@ -59,12 +74,17 @@ if len(sys.argv) == 2:
 					print(first_p)
 					print('\n')
 					a_result = a_result+first_p+second_p
+					fill_word = 0
+					same_word = 0
+				elif same_word == 1:
+					print("You fill with the exist string in the dictionary")
 				else:
 					print('Please fill both input!')
-			elif add_check == "n":
+			elif add_check == "n" or "s":
 				if status_del == 1:
 					if len(recent_add) != 0:
 						a_result = a_result_raw+recent_add
+						print('Ini yang run!')
 					else:
 						print("Nothing changed!")
 						sys.exit()
@@ -92,7 +112,7 @@ if len(sys.argv) == 2:
 					print("Not Found!")
 				else:
 					del_2 = recent_add.get(del_1)
-					print(f"Deleting {del_1} and {del_2}")
+					print(f"Deleting {del_1} and kamu {del_2}")
 					time.sleep(1)
 					del recent_add[del_1]
 					del recent_add[del_2]
