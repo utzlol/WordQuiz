@@ -74,8 +74,6 @@ if len(sys.argv) == 2:
 					print(first_p)
 					print('\n')
 					a_result = a_result+first_p+second_p
-					fill_word = 0
-					same_word = 0
 				elif same_word == 1:
 					print("You fill with the exist string in the dictionary")
 				else:
