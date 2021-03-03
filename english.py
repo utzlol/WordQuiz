@@ -36,6 +36,9 @@ if len(sys.argv) == 2:
 		print(read.read())
 		read.seek(0)
 		a_result = str(read.read())
+		a_result_raw_dict = ast.literal_eval(a_result)
+		a_result_raw_dict = a_result_raw_dict.values()
+		print("\n\n\n\n\n")
 		print(a_result)
 		read.close()
 
@@ -62,7 +65,7 @@ if len(sys.argv) == 2:
 					execute_same_word = 0
 				
 				if execute_same_word == 1:
-					if first_d in str(a_result_raw) or second_d in str(a_result_raw):
+					if first_d in a_result_raw_dict or second_d in a_result_raw_dict:
 						same_word = 1
 						execute_same_word = 0
 
@@ -82,7 +85,6 @@ if len(sys.argv) == 2:
 				if status_del == 1:
 					if len(recent_add) != 0:
 						a_result = a_result_raw+recent_add
-						print('Ini yang run!')
 					else:
 						print("Nothing changed!")
 						sys.exit()
@@ -110,7 +112,7 @@ if len(sys.argv) == 2:
 					print("Not Found!")
 				else:
 					del_2 = recent_add.get(del_1)
-					print(f"Deleting {del_1} and kamu {del_2}")
+					print(f"Deleting {del_1} and {del_2}")
 					time.sleep(1)
 					del recent_add[del_1]
 					del recent_add[del_2]
@@ -145,3 +147,4 @@ while True:
 	print('\n')
 	print("--------------")
 	print('\n')
+
