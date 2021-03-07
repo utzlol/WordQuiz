@@ -50,9 +50,11 @@ if len(sys.argv) == 2:
 		print('Create Mode Active!')
 		
 		while True:
+			a_recent_add_dict = ''
 			same_word = 0
 			fill_word = 0
 			execute_same_word = 1
+			same_recent_word = 0
 			
 			add_check = input('Sure? (Y/n) ').lower()
 			if add_check == "y" or add_check == "":
@@ -61,24 +63,32 @@ if len(sys.argv) == 2:
 				
 				if len(first_d) != 0 and len(second_d) != 0:
 					fill_word = 1
-				else:
-					execute_same_word = 0
-				
-				if execute_same_word == 1:
-					if first_d in a_result_raw_dict or second_d in a_result_raw_dict:
+					
+				if first_d in a_result_raw_dict or second_d in a_result_raw_dict:
 						same_word = 1
 						execute_same_word = 0
 
-				if fill_word == 1 and same_word == 0:
+				if len(str(recent_add)) != 0:
+						a_recent_add_dict = '{'+recent_add+'}' 
+						a_recent_add_dict = a_recent_add_dict.replace(',,',',').replace('{,','{').replace(',}','}')
+						a_recent_add_dict = ast.literal_eval(a_recent_add_dict)
+						a_recent_add_dict = a_recent_add_dict.values()
+						if first_d in a_recent_add_dict or second_d in a_recent_add_dict:
+							same_recent_word = 1
+						
+				if fill_word == 1 and same_word == 0 and same_recent_word == 0:
 					status_add = 1
 					first_p = ",'"+first_d+"':'"+second_d+"',"
 					second_p = ",'"+second_d+"':'"+first_d+"',"
 					recent_add = recent_add+first_p+second_p
 					print(first_p)
-					print('\n')
+					print('\n')   
 					a_result = a_result+first_p+second_p
 				elif same_word == 1:
 					print("You fill with the exist string in the dictionary")
+				elif same_recent_word == 1:
+					print(first_d+":"+second_d+" have been added to the recent dictionary")
+					print(a_recent_add_dict)
 				else:
 					print('Please fill both input!')
 			elif add_check == "n" or "s":
@@ -147,4 +157,3 @@ while True:
 	print('\n')
 	print("--------------")
 	print('\n')
-
