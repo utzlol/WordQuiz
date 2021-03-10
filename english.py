@@ -144,16 +144,58 @@ if len(sys.argv) == 2:
 if len(sys.argv) > 2:
 	print('too much argument!')
 
+turn = 0
+showed_word = ['','','','','','','','','','']
+
 with open("word.txt","r") as wrd:
 	lsf = wrd.read()
 	ls = ast.literal_eval(lsf)
 while True:
+	same_showed_word = 0
 	rc = random.choice(list(ls))
-	print(colored(rc, "blue"))
-	q = input("Ready?")
-	if len(q) > 0:
-		break
-	print(colored(ls.get(rc), "yellow"))
-	print('\n')
-	print("--------------")
-	print('\n')
+	if rc not in showed_word:
+		print(colored(rc, "blue"))
+		q = input("Ready?")
+		if len(q) > 0:
+			break
+		print(colored(ls.get(rc), "yellow"))
+		print('\n')
+		print("--------------")
+		print('\n')
+	else:
+		same_showed_word = 1
+			
+	if len(rc) != 0 and same_showed_word == 0:
+		if turn == 9:
+			showed_word[turn] = rc
+			turn = 0
+	
+		elif turn == 8:
+			showed_word[turn] = rc
+			turn = turn + 1
+		
+		elif turn == 7:
+			showed_word[turn] = rc
+			turn = turn + 1
+		elif turn == 6:
+			showed_word[turn] = rc
+			turn = turn + 1
+		elif turn == 5:
+			showed_word[turn] = rc
+			turn = turn + 1
+		elif turn == 4:
+			showed_word[turn] = rc
+			turn = turn + 1
+		elif turn == 3:
+			showed_word[turn] = rc
+			turn = turn + 1
+		elif turn == 2:
+			showed_word[turn] = rc
+			turn = turn + 1
+		elif turn == 1:
+			showed_word[turn] = rc
+			turn = turn + 1
+		elif turn == 0:
+			showed_word[turn] = rc
+			turn = turn + 1
+
